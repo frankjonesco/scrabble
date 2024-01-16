@@ -16,7 +16,7 @@ class WordSeeder extends Seeder
 
         $valid_words_array = [];
 
-        $valid_word_list = fopen('https://scrabutility.com/TWL06.txt', 'r');
+        $valid_word_list = fopen(public_path('valid-words.txt'), 'r');
 
         if($valid_word_list){
             while (($line = fgets($valid_word_list)) !== false) {
@@ -33,5 +33,6 @@ class WordSeeder extends Seeder
             ]);
 
         }
+
     }
 }

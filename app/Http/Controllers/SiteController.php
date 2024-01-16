@@ -101,6 +101,8 @@ class SiteController extends Controller
 
     public function import()
     {   
+        $valid_word_list = fopen(public_path('valid-words.txt'), 'r');
+        dd(public_path('valid-words.txt'));
         $words = [];
 
         $valid_word_list = file_get_contents("https://scrabutility.com/TWL06.txt");
