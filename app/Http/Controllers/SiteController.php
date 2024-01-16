@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
     public function index() : View
     {
-        
+
         // LETTERS AND QUANTITIES
 
         $tiles = ['A'=>9,'B'=>2,'C'=>2,'D'=>4,'E'=>12,'F'=>2,'G'=>3,'H'=>2,'I'=>9,'J'=>1,'K'=>1,'L'=>4,'M'=>2,'N'=>6,'O'=>8,'P'=>2,'Q'=>1,'R'=>6,'S'=>4,'T'=>6,'U'=>4,'V'=>2,'W'=>2,'X'=>1,'Y'=>2,'Z'=>1,'_'=>2];
@@ -67,6 +68,8 @@ class SiteController extends Controller
 
         // dd($user);
 
+        // $content=file_get_contents("https://scrabutility.com/TWL06.txt");
+        // dd(json_encode($content));
         return view('index', [
             'user_tiles' => $user['tiles']
         ]);
@@ -91,5 +94,32 @@ class SiteController extends Controller
     //     }
 
     //     return $score;
+    }
+
+
+
+
+    public function import()
+    {   
+        $words = [];
+
+        $valid_word_list = file_get_contents("https://scrabutility.com/TWL06.txt");
+
+        $handle = fopen('https://scrabutility.com/TWL06.txt', 'r');
+
+        if($handle){
+            while (($line = fgets($handle)) !== false) {
+                $words[] = trim(preg_replace('/\s+/', ' ', $line));
+                // $words[] = str_replace('\r\n', 'pop', $line);
+            }
+
+            fclose($handle);
+        }
+
+        foreach($words as $word){
+            echo $word.'<br>';
+        }
+        
+        
     }
 }

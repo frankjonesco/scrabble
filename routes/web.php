@@ -16,4 +16,5 @@ use App\Http\Controllers\SiteController;
 
 Route::controller(SiteController::class)->group(function(){
     Route::get('/', 'index');
+    Route::get('/import', 'import');
 });
